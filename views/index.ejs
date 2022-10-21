@@ -23,8 +23,16 @@
         <button type="submit">Create Note</button>
     </form>
 
+    <!-- Dynamically render notes depending on how many are stored in MongoDB database -->
+
     <% allNotes.forEach(allNotes => { %>
         <div> <%= allNotes.title %></div>
+        <div> <%= allNotes.content %></div>
+        <div> <%= allNotes.date.toUTCString()  %></div>
+        <br>
+        <form method="POST" action="/<%= allNotes.id %>?_method=DELETE">
+            <button type="submit">Delete</button>
+        </form>
     <% }) %>
 
 

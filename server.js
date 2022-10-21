@@ -2,10 +2,12 @@
 
 const express = require('express');
 app = express();
+const methodOverride = require('method-override');
 
-// allow express to accept form data
+// allow express to accept form data, and put/delete request from client
 
-app.use(express.urlencoded({ extended: true })); 
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method')); // allow server to use method override (+ query)
 
 // Set ejs view engine and set-up views folder
 

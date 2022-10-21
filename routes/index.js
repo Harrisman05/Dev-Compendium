@@ -27,8 +27,6 @@ router.route('/')
 
         try {
             const saveNote = await created_note.save();
-            // const allNotes = await Note.find({});
-            // console.log(allNotes);
             res.redirect('/');
         } catch {
             res.render('/', {
@@ -37,5 +35,20 @@ router.route('/')
         }
 
     });
+
+// :id needed as a different note id is sent back to server each time, depending on which note the user wants to delete
+
+router.delete("/:id", async (req, res) => { 
+    console.log("Delete request sent from client");
+    let deleted_note;
+    try {
+        deleted_note = await Note.findByIdAndRemove(req.params.id);
+        res.redirect('/');
+    } catch {
+        res.render()
+    }
+
+});
+
 
 module.exports = router;
