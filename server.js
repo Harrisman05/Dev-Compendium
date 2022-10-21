@@ -15,12 +15,10 @@ app.set('views', __dirname + '/views'); // tells server where views folder is
 // Import routers
 
 const indexRouter = require('./routes/index');
-const show_dataRouter = require('./routes/show_data');
 
 // Mount routers to roots/resources
 
 app.use("/", indexRouter);
-app.use("/show_data", show_dataRouter)
 
 // Connectiing to Mongoose Database
 
