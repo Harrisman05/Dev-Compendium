@@ -1,13 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harley's Dev Compendium</title>
 </head>
+
 <body>
     <h1>Harley's Dev Compendium</h1>
     <%= text %>
+    <form action="/" method="POST">
+        <div>
+            <label> Title </label>
+            <input type="text" name="title" required>
+        </div>
+        <div>
+            <label> Content </label>
+            <input type="text" name="content" required>
+        </div>
+        <button type="submit">Create Note</button>
+    </form>
+
+    <% allNotes.forEach(allNotes => { %>
+        <div> <%= allNotes.title %></div>
+    <% }) %>
+
+
 </body>
+
 </html>

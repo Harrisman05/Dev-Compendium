@@ -1,9 +1,41 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
+const Note = require('../model/note');
 
-router.get('/', (req, res) => {
-    console.log("Get request sent from client to root directory");
-    res.render('index', {text: "hello"})
-});
+router.route('/')
+    .get( async (req, res) => {
+
+        console.log("Get request sent from client to root directory");
+
+        const allNotes = await Note.find({});
+        res.render('index', {
+            text: "res.render sent back from server",
+            allNotes: allNotes // sending allNotes to client, rendered in ejs file
+        });
+
+    })
+    .post(async (req, res) => {
+        console.log("Post request sent from client");
+        console.log(req.body);
+
+        const created_note = new Note({
+            title: req.body.title,
+            content: req.body.content,
+            date: new Date()
+        });
+
+
+        try {
+            const saveNote = await created_note.save();
+            // const allNotes = await Note.find({});
+            // console.log(allNotes);
+            res.redirect('/');
+        } catch {
+            res.render('/', {
+                error: 'Error creating Note'
+            })
+        }
+
+    });
 
 module.exports = router;
