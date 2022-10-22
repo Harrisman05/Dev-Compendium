@@ -5,12 +5,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/main.css"> <!-- no need to add public to directory in file path-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap" rel="stylesheet">
     <title>Harley's Dev Compendium</title>
 </head>
 
 <body>
-    <h1>Harley's Dev Compendium</h1>
-    <%- body %>
+
+    <div class="create_note_container">
+        <h1>Harley's Dev Compendium</h1>
+        <!-- Create note section -->
+        <%- include('../partials/_create_note.ejs') %>
+    </div>
+    <section class="notes_section">
+        <%- body %>
+    </section>
 
 </body>
 

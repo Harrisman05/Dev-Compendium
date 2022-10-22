@@ -24,7 +24,6 @@ router.route('/')
             date: new Date()
         });
 
-
         try {
             const saveNote = await created_note.save();
             res.redirect('/');
@@ -45,7 +44,8 @@ router.delete("/:id", async (req, res) => {
         deleted_note = await Note.findByIdAndRemove(req.params.id);
         res.redirect('/');
     } catch {
-        res.render()
+        console.log("Error");
+        res.redirect('/');        
     }
 
 });

@@ -16,6 +16,7 @@ app.set('view engine', 'ejs'); // allows usage of ejs in views
 app.set('views', __dirname + '/views'); // tells server where views folder is
 app.set('layout', 'layouts/layout'); // 
 app.use(expressLayouts);
+app.use(express.static('public'));
 
 // Import routers
 

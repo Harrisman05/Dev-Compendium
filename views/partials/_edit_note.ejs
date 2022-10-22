@@ -1,19 +1,20 @@
 <% allNotes.forEach(allNotes => { %>
-<br><br>
-
 <% if(selected_note_id === allNotes.id) { %>
-<div> I'm the selected note</div>
-<form method="POST" action="/edit/<%= allNotes.id %>?_method=PUT">
-    <textarea placeholder="<%= allNotes.title %>" name="edited_title" required></textarea>
-    <textarea placeholder="<%= allNotes.content %>" name="edited_content" required></textarea>
-    <div> <%= allNotes.id %></div>
-    <div> <%= allNotes.date.toUTCString() %></div>
-    <button type="submit">Update</button>
-</form>
-<a href="/">Return to all Notes</a>
+<div class="notebox">
+    <form method="POST" action="/edit/<%= allNotes.id %>?_method=PUT">
+        <textarea placeholder="<%= allNotes.title %>" name="edited_title" required></textarea>
+        <textarea placeholder="<%= allNotes.content %>" name="edited_content" required></textarea>
+        <div> <%= allNotes.date.toUTCString() %></div>
+        <div class="modifiers_container">
+            <button type="submit" class="note_modifier" id="update_button">Update</button>
+            <a href="/" class="note_modifier" id="cancel_button">Cancel</a>
+        </div>
+    </form>
+
+</div>
 <% } else { %>
-<div> <%= allNotes.title %></div>
-<div> <%= allNotes.content %></div>
-<div> <%= allNotes.date.toUTCString() %></div>
+<%- include('./_notebox_readonly.ejs', {allNotes: allNotes}); %>
 <% } %>
 <% }) %>
+
+<!-- Have to pass allNotes as a context variable to the partial, otherwise allNotes variable is undefined - https://stackoverflow.com/questions/29196562/how-to-include-a-template-with-parameters-in-ejs -->

@@ -1,0 +1,11 @@
+<div class="notebox">
+    <div> <%= allNotes.title %></div>
+    <div> <%= allNotes.content %></div>
+    <div> <%= allNotes.date.toUTCString() %></div>
+    <div class="modifiers_container">
+        <a href="/edit/<%= allNotes.id %>" class="note_modifier" id="edit_button">Edit</a>
+        <form method="POST" action="/<%= allNotes.id %>?_method=DELETE" id="delete_form">
+            <button type="submit" class="note_modifier" id="delete_button">Delete</button>
+        </form>
+    </div>
+</div>
