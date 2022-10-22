@@ -1,0 +1,11 @@
+<% allNotes.forEach(allNotes => { %>
+    <br>
+    <div> <%= allNotes.title %></div>
+    <div> <%= allNotes.content %></div>
+    <div> <%= allNotes.date.toUTCString() %></div>
+    <form method="POST" action="/<%= allNotes.id %>?_method=DELETE">
+        <button type="submit">Delete</button>
+    </form>
+    <a href="/edit/<%= allNotes.id %>">Edit</a>
+    <br>
+<% }) %>

@@ -1,0 +1,19 @@
+<% allNotes.forEach(allNotes => { %>
+<br><br>
+
+<% if(selected_note_id === allNotes.id) { %>
+<div> I'm the selected note</div>
+<form method="POST" action="/edit/<%= allNotes.id %>?_method=PUT">
+    <textarea placeholder="<%= allNotes.title %>" name="edited_title" required></textarea>
+    <textarea placeholder="<%= allNotes.content %>" name="edited_content" required></textarea>
+    <div> <%= allNotes.id %></div>
+    <div> <%= allNotes.date.toUTCString() %></div>
+    <button type="submit">Update</button>
+</form>
+<a href="/">Return to all Notes</a>
+<% } else { %>
+<div> <%= allNotes.title %></div>
+<div> <%= allNotes.content %></div>
+<div> <%= allNotes.date.toUTCString() %></div>
+<% } %>
+<% }) %>

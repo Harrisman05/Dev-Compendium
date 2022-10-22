@@ -2,6 +2,7 @@
 
 const express = require('express');
 app = express();
+const expressLayouts = require('express-ejs-layouts');
 const methodOverride = require('method-override');
 
 // allow express to accept form data, and put/delete request from client
@@ -13,14 +14,18 @@ app.use(methodOverride('_method')); // allow server to use method override (+ qu
 
 app.set('view engine', 'ejs'); // allows usage of ejs in views
 app.set('views', __dirname + '/views'); // tells server where views folder is
+app.set('layout', 'layouts/layout'); // 
+app.use(expressLayouts);
 
 // Import routers
 
 const indexRouter = require('./routes/index');
+const editRouter = require('./routes/edit');
 
 // Mount routers to roots/resources
 
 app.use("/", indexRouter);
+app.use("/edit", editRouter);
 
 // Connectiing to Mongoose Database
 

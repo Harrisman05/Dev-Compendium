@@ -1,41 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- Create note section -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Harley's Dev Compendium</title>
-</head>
+<%- include('./partials/_create_note.ejs') %>
 
-<body>
-    <h1>Harley's Dev Compendium</h1>
-    <%= text %>
-    <form action="/" method="POST">
-        <div>
-            <label> Title </label>
-            <input type="text" name="title" required>
-        </div>
-        <div>
-            <label> Content </label>
-            <input type="text" name="content" required>
-        </div>
-        <button type="submit">Create Note</button>
-    </form>
+<!-- Dynamically render notes depending on how many are stored in MongoDB database -->
 
-    <!-- Dynamically render notes depending on how many are stored in MongoDB database -->
-
-    <% allNotes.forEach(allNotes => { %>
-        <div> <%= allNotes.title %></div>
-        <div> <%= allNotes.content %></div>
-        <div> <%= allNotes.date.toUTCString()  %></div>
-        <br>
-        <form method="POST" action="/<%= allNotes.id %>?_method=DELETE">
-            <button type="submit">Delete</button>
-        </form>
-    <% }) %>
-
-
-</body>
-
-</html>
+<%- include('./partials/_generate_notes.ejs') %>
