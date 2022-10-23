@@ -2,6 +2,17 @@ const express = require('express');
 const router = express.Router();
 const Note = require('../model/note');
 
+const imageMimeTypes = ['image/jpeg','image/png','image/gif']
+const path = require('path');
+const uploadPath = path.join('public', Note.imagesBasePath)
+const multer = require('multer');
+const upload = multer({
+    dest: uploadPath,
+    fileFilter: (req, file, callback) => {
+        callback(null, imageMimeTypes.includes(file.mimetype));
+    }
+});
+
 router.get('/', async (req, res) => {
     console.log("Get request sent from client to root directory");
         
@@ -12,15 +23,21 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.post('/', async (req, res) => {
-    console.log("Post request sent from client");
-    console.log(req.body);
+router.post('/', upload.single('input_file'), async (req, res) => {
+
+    
+    const fileName = req.file != null ? req.file.filename : null;
+
 
     const created_note = new Note({
         title: req.body.title,
         content: req.body.content,
-        date: new Date()
+        date: new Date(),
+        imageName: fileName
     });
+
+    console.log(created_note);
+    
 
     try {
         const saveNote = await created_note.save();

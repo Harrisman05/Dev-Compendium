@@ -2,6 +2,7 @@
     <div> <%= allNotes.title %></div>
     <div> <%= allNotes.content %></div>
     <div> <%= allNotes.date.toUTCString() %></div>
+    <img src="/assets/images/633b907a700c66cd3b3157f500f6a495" height="auto" width="200px" alt="Hello">
     <div class="modifiers_container">
         <a href="/edit/<%= allNotes.id %>" class="note_modifier" id="edit_button">Edit</a>
         <form method="POST" action="/<%= allNotes.id %>?_method=DELETE" id="delete_form">
