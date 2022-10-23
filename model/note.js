@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const imagesBasePath = 'assets'
+
 const noteSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -16,3 +18,5 @@ const noteSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Note', noteSchema); // Note is name of table, noteSchema defines the table
+
+module.exports.imagesBasePath = imagesBasePath;

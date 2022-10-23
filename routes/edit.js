@@ -5,7 +5,7 @@ const Note = require('../model/note');
 router.get("/:id", async (req, res) => {
 
     const allNotes = await Note.find({});
-
+    
     res.render('edit', {
         allNotes: allNotes,
         selected_note_id: req.params.id

@@ -4,6 +4,7 @@ const express = require('express');
 app = express();
 const expressLayouts = require('express-ejs-layouts');
 const methodOverride = require('method-override');
+const path = require('path');
 
 // allow express to accept form data, and put/delete request from client
 
