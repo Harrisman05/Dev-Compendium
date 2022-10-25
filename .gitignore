@@ -1,2 +1,4 @@
 node_modules
 .env
+strava_api_explained.txt
+clientside_strava.js
