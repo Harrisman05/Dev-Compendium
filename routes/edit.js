@@ -16,6 +16,14 @@ const upload = multer({
     }
 });
 
+// Middleware - Ensure to reset layout
+
+router.use((req, res, next) => {
+    // Change layout for back to default layout page
+    req.app.set('layout', 'layouts/layout');
+    next();
+});
+
 // Routes
 
 router.get("/:id", async (req, res) => {

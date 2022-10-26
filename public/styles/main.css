@@ -6,6 +6,10 @@
      rgb(219, 219, 219);
 }
 
+body {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
 a:link {
     text-decoration: none;
     color: black;
@@ -17,10 +21,6 @@ a:visited {
 
 textarea {
     display: block;
-}
-
-body {
-    font-family: 'Nunito Sans', sans-serif;
 }
 
 .notes_section {

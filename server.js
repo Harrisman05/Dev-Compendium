@@ -15,7 +15,7 @@ app.use(methodOverride('_method')); // allow server to use method override (+ qu
 
 app.set('view engine', 'ejs'); // allows usage of ejs in views
 app.set('views', __dirname + '/views'); // tells server where views folder is
-app.set('layout', 'layouts/layout'); // 
+app.set('layout', 'layouts/layout'); 
 app.use(expressLayouts);
 app.use(express.static('public'));
 
@@ -23,11 +23,13 @@ app.use(express.static('public'));
 
 const indexRouter = require('./routes/index');
 const editRouter = require('./routes/edit');
+const stravaRouter = require('./routes/strava');
 
 // Mount routers to roots/resources
 
 app.use("/", indexRouter);
 app.use("/edit", editRouter);
+app.use("/strava", stravaRouter);
 
 // Connectiing to Mongoose Database
 
