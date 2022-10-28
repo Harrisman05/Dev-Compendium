@@ -2,11 +2,13 @@
 
 const express = require('express');
 const router = express.Router();
+const StravaActivity = require('../model/strava');
 const path = require('path'); // path needed to direct strava to env file
 const dotenv = require('dotenv').config({
     path: path.resolve(__dirname, '../.env') // file couldn't find environment variables
 });
 const fetch = require("node-fetch"); // imported old version of node fetch so require statement could be used
+const { userInfo } = require('os');
 
 // Middleware to change layout view
 
@@ -20,10 +22,60 @@ router.use((req, res, next) => {
 
 router.get("/", async (req, res) => {
     console.log("Get request received from strava resource");
+    
+    const strava_db = await StravaActivity.find({});
+    // console.log(strava_db);
+    
     const strava_data = await getStravaData();
+    // console.log(`Strava data - ${JSON.stringify(strava_data)}`);
+
+    for (const run of strava_data) {
+
+        const doesRunExist = await StravaActivity.exists({upload_id: run.upload_id});
+        console.log(doesRunExist);
+
+        if (doesRunExist) {
+            console.log("Run already exists, don't save");
+
+            // Delete records in strava_db
+
+            try {
+                await StravaActivity.deleteOne({upload_id: run.upload_id});
+            } catch {
+                console.log("Error saving a new run!");
+            }
+            
+        } else {
+            console.log("Run doesn't exist, save run");
+
+            const new_run = new StravaActivity({
+                upload_id: run.upload_id,
+                average_speed: run.average_speed,
+                distance: run.distance,
+                moving_time: run.moving_time,
+                max_speed: run.max_speed,
+                date: run.date
+            });
+
+            try {
+                const save_new_run = await new_run.save();
+            } catch {
+                console.log("Error saving a new run!");
+            }
+            
+        }
+    
+    }
+
+    console.log(strava_db);
+    
 
     res.render("strava_index", {strava_data: strava_data});
 });
+
+
+
+// Get Strava Data API call
 
 async function getStravaData() {
 
@@ -53,26 +105,42 @@ async function getStravaData() {
     
     const activitiesToJson = await activities.json();
 
-    const sjpRuns = activitiesToJson.filter((data_object) => {
+    return transformStravaData(activitiesToJson);
+
+}
+
+// Extract relevant Strava Data
+
+function transformStravaData(allActivities) {
+
+    const sjpAllData = allActivities.filter((data_object) => {
         return data_object.name.startsWith("SJP");
     });
 
-    console.log(sjpRuns);
-    const average_speed = sjpRuns[0].average_speed;
-    const distance = sjpRuns[0].distance;
-    const moving_time = sjpRuns[0].moving_time;
-    const max_speed = sjpRuns[0].max_speed;
-    const date = sjpRuns[0].start_date;
+    // console.log(sjpAllData);
 
-    console.log(`
-    Average Speed (m/s) - ${average_speed}
-    Distance (m) - ${distance}
-    Moving Time (s) - ${moving_time}   
-    Max Speed (m/s) - ${max_speed}
-    Date - ${date}
-    `);
+    sjpExtractedData = sjpAllData.map((run_object) => {
 
-    return {average_speed, distance, moving_time, max_speed, date};
+        const upload_id = run_object.upload_id;
+        const average_speed = run_object.average_speed;
+        const distance = run_object.distance;
+        const moving_time = run_object.moving_time;
+        const max_speed = run_object.max_speed;
+        const date = run_object.start_date;
+
+        return {            
+            upload_id,
+            average_speed,
+            distance,
+            moving_time,
+            max_speed,
+            date
+        }
+    });
+
+    // console.log(sjpExtractedData);
+
+    return sjpExtractedData;
 }
 
 module.exports = router;

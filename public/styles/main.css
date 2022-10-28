@@ -2,12 +2,11 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    background-color:
-     rgb(219, 219, 219);
 }
 
 body {
     font-family: 'Nunito Sans', sans-serif;
+    background-color:rgb(219, 219, 219);
 }
 
 a:link {
@@ -76,10 +75,6 @@ textarea {
     word-wrap: break-word;
 }
 
-.notebox > * {
-    background-color: inherit;
-}
-
 .notebox form {
     background-color: inherit;
     display: flex;
@@ -90,6 +85,7 @@ textarea {
 .modifiers_container {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    background-color: inherit;
 }
 
 .modifiers_container .note_modifier {
@@ -109,6 +105,14 @@ textarea {
 
 .note_modifier:hover {
     filter: brightness(120%);
+}
+
+.file_input_container {
+    background-color: inherit;
+}
+
+.file_input_container  {
+    background-color: inherit;
 }
 
 #edit_button {
