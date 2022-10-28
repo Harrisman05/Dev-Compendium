@@ -8,7 +8,6 @@ const dotenv = require('dotenv').config({
     path: path.resolve(__dirname, '../.env') // file couldn't find environment variables
 });
 const fetch = require("node-fetch"); // imported old version of node fetch so require statement could be used
-const { userInfo } = require('os');
 
 // Middleware to change layout view
 
@@ -24,10 +23,7 @@ router.get("/", async (req, res) => {
     console.log("Get request received from strava resource");
     
     const strava_db = await StravaActivity.find({});
-    // console.log(strava_db);
-    
     const strava_data = await getStravaData();
-    // console.log(`Strava data - ${JSON.stringify(strava_data)}`);
 
     for (const run of strava_data) {
 
@@ -36,11 +32,10 @@ router.get("/", async (req, res) => {
 
         if (doesRunExist) {
             console.log("Run already exists, don't save");
-
-            // Delete records in strava_db
-
+            
             try {
-                await StravaActivity.deleteOne({upload_id: run.upload_id});
+                // Delete records in strava_db
+                // await StravaActivity.deleteOne({upload_id: run.upload_id});
             } catch {
                 console.log("Error saving a new run!");
             }
@@ -73,7 +68,13 @@ router.get("/", async (req, res) => {
     res.render("strava_index", {strava_data: strava_data});
 });
 
+// Delete all data in strave db
 
+router.delete('/delete', async (req, res) => {
+    console.log("Delete request sent from client on Strava Page");
+
+    res.redirect('/strava');
+})
 
 // Get Strava Data API call
 

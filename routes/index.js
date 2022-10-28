@@ -73,7 +73,6 @@ router.delete("/:id", async (req, res) => {
         const findNote = await Note.findById(req.params.id);
         console.log(findNote);
         
-
         if (findNote.imageName != null) { // if note has image, delete image from assets folder
             deleteImage(findNote.imageName);
         }
