@@ -1,8 +1,13 @@
 <h1>hello from strava.ejs </h1>
-<div> upload id - <%= strava_data.upload_id %> </div>
-<div> average_speed - <%= strava_data.average_speed %> </div>
-<div> distance - <%= strava_data.distance %> </div>
-<div> moving time - <%= strava_data.moving_time %> </div>
-<div> max speed - <%= strava_data.max_speed %> </div>
-<div> date - <%= strava_data.date %> </div>
+<% strava_db.forEach((run) => { %>
+    <br>
+    <div> upload id - <%= run.upload_id %> </div>
+    <div> average_speed - <%= run.average_speed %> </div>
+    <div> distance - <%= run.distance %> </div>
+    <div> moving time - <%= run.moving_time %> </div>
+    <div> max speed - <%= run.max_speed %> </div>
+    <div> date - <%= run.date.toUTCString() %> </div>
+    <br>
+<% }); %>
+
 

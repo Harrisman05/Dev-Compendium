@@ -23,23 +23,15 @@ router.get("/", async (req, res) => {
     console.log("Get request received from strava resource");
     
     const strava_db = await StravaActivity.find({});
-    const strava_data = await getStravaData();
+    const strava_api_data = await getStravaData();
 
-    for (const run of strava_data) {
+    for (const run of strava_api_data) {
 
         const doesRunExist = await StravaActivity.exists({upload_id: run.upload_id});
         console.log(doesRunExist);
 
         if (doesRunExist) {
             console.log("Run already exists, don't save");
-            
-            try {
-                // Delete records in strava_db
-                // await StravaActivity.deleteOne({upload_id: run.upload_id});
-            } catch {
-                console.log("Error saving a new run!");
-            }
-            
         } else {
             console.log("Run doesn't exist, save run");
 
@@ -59,19 +51,17 @@ router.get("/", async (req, res) => {
             }
             
         }
-    
-    }
+    }   
 
-    console.log(strava_db);
-    
-
-    res.render("strava_index", {strava_data: strava_data});
+    res.render("strava_index", {strava_db: strava_db});
 });
 
 // Delete all data in strave db
 
 router.delete('/delete', async (req, res) => {
     console.log("Delete request sent from client on Strava Page");
+
+    const delete_all_activies = await StravaActivity.deleteMany({});
 
     res.redirect('/strava');
 })
@@ -127,7 +117,7 @@ function transformStravaData(allActivities) {
         const distance = run_object.distance;
         const moving_time = run_object.moving_time;
         const max_speed = run_object.max_speed;
-        const date = run_object.start_date;
+        const date = new Date(run_object.start_date);
 
         return {            
             upload_id,
@@ -139,7 +129,7 @@ function transformStravaData(allActivities) {
         }
     });
 
-    // console.log(sjpExtractedData);
+    console.log(sjpExtractedData);
 
     return sjpExtractedData;
 }
