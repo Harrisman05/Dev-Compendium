@@ -38,16 +38,15 @@ router.get('/', async (req, res) => {
 
 router.post('/', upload.single('input_file'), async (req, res) => {
 
-    console.log(req.file);
-
     const fileName = req.file != null ? req.file.filename : null;
-    console.log(fileName);
+    const embed_url = convertToEmbedURL(req.body.youtube_video_url);
     
     const created_note = new Note({
         title: req.body.title,
         content: req.body.content,
+        imageName: fileName,
+        youtube_video_url: embed_url,
         date: new Date(),
-        imageName: fileName
     });
 
     console.log(created_note);
@@ -93,6 +92,12 @@ function deleteImage(imageName) {
     fs.unlink(path.join(uploadPath, imageName), err => {
         if (err) console.error(err);
     });
+}
+
+function convertToEmbedURL(url) {
+    const video_id = url.slice(32, 43);
+    const embed_url = 'https://www.youtube.com/embed/' + video_id;
+    return embed_url;
 }
 
 module.exports = router;

@@ -8,15 +8,13 @@
 
 document.addEventListener('scroll', (e) => {
     currentScrollPosition = window.scrollY;
-    console.log(currentScrollPosition);
+    // console.log(currentScrollPosition);
     localStorage.setItem("currentScrollPosition", currentScrollPosition);
 });
 
 
 window.onload = () => {
     const reloadScrollPosition = localStorage.getItem("currentScrollPosition");
-    console.log("window onload function executing"); 
+    // console.log("window onload function executing"); 
     window.scroll(0, reloadScrollPosition);
 }
-
-

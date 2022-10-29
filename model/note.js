@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const imagesBasePath = 'assets/images'
+const imagesBasePath = 'assets/images';
 
 const noteSchema = new mongoose.Schema({
     title: {
@@ -9,6 +9,9 @@ const noteSchema = new mongoose.Schema({
     content: {
         type: String,
         required: true
+    },
+    youtube_video_url: {
+        type: String
     },
     date: {
         type: Date,

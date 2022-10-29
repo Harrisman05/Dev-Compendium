@@ -25,33 +25,7 @@ router.get("/", async (req, res) => {
     const strava_db = await StravaActivity.find({});
     const strava_api_data = await getStravaData();
 
-    for (const run of strava_api_data) {
-
-        const doesRunExist = await StravaActivity.exists({upload_id: run.upload_id});
-        console.log(doesRunExist);
-
-        if (doesRunExist) {
-            console.log("Run already exists, don't save");
-        } else {
-            console.log("Run doesn't exist, save run");
-
-            const new_run = new StravaActivity({
-                upload_id: run.upload_id,
-                average_speed: run.average_speed,
-                distance: run.distance,
-                moving_time: run.moving_time,
-                max_speed: run.max_speed,
-                date: run.date
-            });
-
-            try {
-                const save_new_run = await new_run.save();
-            } catch {
-                console.log("Error saving a new run!");
-            }
-            
-        }
-    }   
+    await checkRunsInDB(strava_api_data);
 
     res.render("strava_index", {strava_db: strava_db});
 });
@@ -61,7 +35,7 @@ router.get("/", async (req, res) => {
 router.delete('/delete', async (req, res) => {
     console.log("Delete request sent from client on Strava Page");
 
-    const delete_all_activies = await StravaActivity.deleteMany({});
+    const delete_all_activities = await StravaActivity.deleteMany({});
 
     res.redirect('/strava');
 })
@@ -129,9 +103,40 @@ function transformStravaData(allActivities) {
         }
     });
 
-    console.log(sjpExtractedData);
+    // console.log(sjpExtractedData);
 
     return sjpExtractedData;
+}
+
+async function checkRunsInDB(strava_api_data) {
+
+    for (const run of strava_api_data) {
+
+        const doesRunExist = await StravaActivity.exists({upload_id: run.upload_id}); // check if run already exists in DB
+        console.log(doesRunExist);
+
+        if (doesRunExist) {
+            console.log("Run already exists, don't save");
+        } else {
+            console.log("Run doesn't exist, save run");
+
+            const new_run = new StravaActivity({
+                upload_id: run.upload_id,
+                average_speed: run.average_speed,
+                distance: run.distance,
+                moving_time: run.moving_time,
+                max_speed: run.max_speed,
+                date: run.date
+            });
+
+            try {
+                const save_new_run = await new_run.save();
+            } catch {
+                console.log("Error saving a new run!");
+            }
+            
+        }
+    }   
 }
 
 module.exports = router;

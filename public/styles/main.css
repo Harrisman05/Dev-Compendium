@@ -71,7 +71,7 @@ textarea {
     flex-direction: column;
     padding: 5px;
     gap: 10px;
-    width: 350px;
+    min-width: 350px;
     word-wrap: break-word;
 }
 
