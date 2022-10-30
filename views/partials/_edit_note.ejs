@@ -1,6 +1,9 @@
 <% allNotes.forEach(allNotes => { %>
 <% if(selected_note_id === allNotes.id) { %>
 <div class="notebox">
+    <div class="note_top_strip">
+        <img id="drawing_pin_image" src="/assets/images/drawing_pin.png" alt="">
+    </div>
     <form method="POST" action="/edit/<%= allNotes.id %>?_method=PUT" enctype="multipart/form-data">
         <input name="edited_title" value="<%= allNotes.title %>">
         <textarea name="edited_content"><%= allNotes.content %></textarea>

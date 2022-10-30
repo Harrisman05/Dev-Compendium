@@ -1,9 +1,14 @@
 <div class="notebox">
-    <div> <%= allNotes.title %></div>
-    <div style="white-space: pre-line"> <%= allNotes.content %></div>
-    <a href=" <%= allNotes.youtube_video_url %>" target="_blank"> <%= allNotes.youtube_video_title %> </a>
-    <div> <%= allNotes.date.toUTCString() %></div>
-    <img src=/assets/images/<%=allNotes.imageName%> height="auto" width="200px" alt="">
+    <div class="note_top_strip">
+        <img id="drawing_pin_image" src="/assets/images/drawing_pin.png" alt="">
+    </div>
+    <h1> <%= allNotes.title %></h1>
+    <div id="notebox_content"> <%= allNotes.content %></div>
+    <img id="upload_image" src=/assets/images/<%=allNotes.imageName%> alt="">
+    <div class="youtube_link_container">
+        <div><span>Youtube Link: </span><a href=" <%= allNotes.youtube_video_url %>" target="_blank"> <%= allNotes.youtube_video_title %> </a></div>
+    </div>
+    <div id="timestamp"> <%= allNotes.date.toUTCString() %></div>
     <div class="modifiers_container">
         <a href="/edit/<%= allNotes.id %>" class="note_modifier" id="edit_button">Edit</a>
         <form method="POST" action="/<%= allNotes.id %>?_method=DELETE" id="delete_form">

@@ -33,6 +33,8 @@ textarea {
     align-items: center;
     gap: 50px;
     padding: 50px;
+    background-image: url('/assets/images/chalkboard.jpg');
+    background-size: cover;
 }
 
 .create_note_container {
@@ -50,6 +52,7 @@ textarea {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    background-color: rgb(218, 215, 254);
 }
 
 .create_note_container label {
@@ -90,13 +93,73 @@ textarea {
 
 .notebox {
     border: 1px black solid;
-    background-color: rgb(212, 203, 203);
+    background-color: #ffcb88;
     display: flex;
     flex-direction: column;
-    padding: 5px;
+    padding:  100px 50px 50px;
     gap: 10px;
     word-wrap: break-word;
-    width: 500px;
+    width: 1000px;
+    position: relative;
+}
+
+.notebox .note_top_strip {
+    position: absolute;
+    height: 75px;
+    width: 100%;
+    background-color: rgb(98, 98, 98);
+    border: black 1px solid;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+
+.notebox #drawing_pin_image {
+    position: absolute;
+    left: 37%;
+    top: -40px;
+    height: auto;
+    width: 200px;
+}
+
+/* https://pixabay.com/vectors/drawing-pin-tack-thumbtack-red-146214/ */
+
+.notebox h1 {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.notebox #notebox_content {
+    border: solid black 2px;
+    white-space: pre-line;
+}
+
+.notebox #upload_image {
+    align-self: center;
+    height: auto;
+    width: 600px;
+}
+
+.notebox .youtube_link_container {
+    margin: auto;
+}
+
+.notebox .youtube_link_container span {
+    font-weight: bold;
+} 
+
+.notebox .youtube_link_container a {
+    color:#0000EE;
+    cursor: pointer;
+}
+
+.notebox .youtube_link_container a:hover {
+    text-decoration: underline;
+} 
+
+.notebox #timestamp {
+    align-self: flex-end;
+    font-style: italic;
 }
 
 .notebox form {
