@@ -13,6 +13,9 @@ const noteSchema = new mongoose.Schema({
     youtube_video_url: {
         type: String
     },
+    youtube_video_title: {
+        type: String
+    },
     date: {
         type: Date,
         required: true

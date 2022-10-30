@@ -1,7 +1,7 @@
 <div class="notebox">
     <div> <%= allNotes.title %></div>
     <div> <%= allNotes.content %></div>
-    <iframe src=" <%= allNotes.youtube_video_url %> " width="703" height="395" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    <a href=" <%= allNotes.youtube_video_url %>" target="_blank"> <%= allNotes.youtube_video_title %> </a>
     <div> <%= allNotes.date.toUTCString() %></div>
     <img src=/assets/images/<%=allNotes.imageName%> height="auto" width="200px" alt="">
     <div class="modifiers_container">

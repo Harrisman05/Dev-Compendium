@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Note = require('../model/note');
+const fetch = require('node-fetch');
 
 // Imports for images
 
@@ -28,7 +29,7 @@ router.use((req, res, next) => {
 
 router.get('/', async (req, res) => {
     console.log("Get request sent from client to root directory");
-        
+
     const allNotes = await Note.find({});
     res.render('index', {
         text: "res.render sent back from server",
@@ -39,13 +40,19 @@ router.get('/', async (req, res) => {
 router.post('/', upload.single('input_file'), async (req, res) => {
 
     const fileName = req.file != null ? req.file.filename : null;
-    const embed_url = convertToEmbedURL(req.body.youtube_video_url);
     
+    let youtube_title
+    if (req.body.youtube_video_url) {
+        youtube_title = await getYoutubeTitle(req.body.youtube_video_url); 
+    }
+
+
     const created_note = new Note({
         title: req.body.title,
         content: req.body.content,
         imageName: fileName,
-        youtube_video_url: embed_url,
+        youtube_video_url: req.body.youtube_video_url,
+        youtube_video_title: youtube_title,
         date: new Date(),
     });
 
@@ -94,10 +101,18 @@ function deleteImage(imageName) {
     });
 }
 
-function convertToEmbedURL(url) {
-    const video_id = url.slice(32, 43);
-    const embed_url = 'https://www.youtube.com/embed/' + video_id;
-    return embed_url;
+async function getYoutubeTitle(vidurl) {
+    
+    const fetch_url = await fetch(`https://noembed.com/embed?dataType=json&url=${vidurl}`);
+
+    const fetch_url_json = await fetch_url.json();
+
+    const fetch_url_title = fetch_url_json.title;
+
+    console.log(fetch_url_title);
+    
+    return fetch_url_title;
+
 }
 
 module.exports = router;

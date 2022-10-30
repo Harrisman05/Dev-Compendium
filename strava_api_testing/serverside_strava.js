@@ -18,47 +18,53 @@ const fetch = require("node-fetch"); // imported old version of node fetch
 
 // Authorisation Code
 
-const auth_link = 'https://www.strava.com/oauth/token'
+// const auth_link = 'https://www.strava.com/oauth/token'
 
-async function getActivities(access_token) {
-    const activities_link = `https://www.strava.com/api/v3/athlete/activities?access_token=${access_token}`
+// async function getActivities(access_token) {
+//     const activities_link = `https://www.strava.com/api/v3/athlete/activities?access_token=${access_token}`
 
-    const activities = await fetch(activities_link)
+//     const activities = await fetch(activities_link)
     
-    const activitiesToJson = await activities.json();
+//     const activitiesToJson = await activities.json();
     
-    console.log(activitiesToJson);
+//     console.log(activitiesToJson);
     
-    return activitiesToJson;
+//     return activitiesToJson;
     
-}
+// }
 
-async function reAuthorise() {
-    const getRefreshToken = await fetch(auth_link, {
-        method: 'post',
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        },
+// async function reAuthorise() {
+//     const getRefreshToken = await fetch(auth_link, {
+//         method: 'post',
+//         headers: {
+//             'Accept': 'application/json, text/plain, */*',
+//             'Content-Type': 'application/json'
+//         },
 
-        body: JSON.stringify({
-            client_id: process.env.CLIENT_ID,
-            client_secret: process.env.CLIENT_SECRET,
-            refresh_token: process.env.REFRESH_TOKEN,
-            grant_type: 'refresh_token'
-        })
-    });
+//         body: JSON.stringify({
+//             client_id: process.env.CLIENT_ID,
+//             client_secret: process.env.CLIENT_SECRET,
+//             refresh_token: process.env.REFRESH_TOKEN,
+//             grant_type: 'refresh_token'
+//         })
+//     });
 
-    const resToJson = await getRefreshToken.json()
-    const access_token = await resToJson.access_token;
+//     const resToJson = await getRefreshToken.json()
+//     const access_token = await resToJson.access_token;
 
-    await getActivities(access_token);
+//     await getActivities(access_token);
     
-}
+// }
 
-const strava_data = reAuthorise();
+// const strava_data = reAuthorise();
 
-module.exports = strava_data;
+const vidurl = 'https://www.youtube.com/watch?v=G3Rpqopaot0&ab_channel=SkySportsFootball';
+
+fetch(`https://noembed.com/embed?dataType=json&url=${vidurl}`)
+  .then(res => res.json())
+  .then(data => console.log('fetch', data.title))
+
+// module.exports = strava_data;
 
 /* 
 https://www.strava.com/oauth/token?client_id=96055&client_secret=58247b5789f817200db3d76a0a860e224d3de98d&refresh_token=05b79007f37a3116b8c28e5e7c9f13645e643dd6&grant_type=refresh_token

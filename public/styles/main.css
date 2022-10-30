@@ -24,7 +24,9 @@ textarea {
 
 .notes_section {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
     gap: 50px;
     padding: 50px;
 }
@@ -71,8 +73,8 @@ textarea {
     flex-direction: column;
     padding: 5px;
     gap: 10px;
-    min-width: 350px;
     word-wrap: break-word;
+    width: 1000px;
 }
 
 .notebox form {
