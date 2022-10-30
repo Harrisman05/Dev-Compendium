@@ -4,6 +4,7 @@
     <form method="POST" action="/edit/<%= allNotes.id %>?_method=PUT" enctype="multipart/form-data">
         <textarea placeholder="<%= allNotes.title %>" name="edited_title"></textarea>
         <textarea placeholder="<%= allNotes.content %>" name="edited_content"></textarea>
+        <textarea placeholder="<%= allNotes.youtube_video_url %>" name="edited_youtube_video_url"></textarea>
         <div> <%= allNotes.date.toUTCString() %></div>
         <div class="file_input_container">
             <input type="file" name="update_file">

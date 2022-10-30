@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Note = require('../model/note');
+const getYoutubeTitle = require('./reuse_functions/getYoutubeTitle');
+const deleteImage = require('./reuse_functions/deleteImage');
 
 // delete image function + dependencies for uploading a file
 
-const fs = require("fs");
 const imageMimeTypes = ['image/jpeg','image/png','image/gif']
 const path = require('path');
 const uploadPath = path.join('public', Note.imagesBasePath)
@@ -44,6 +45,9 @@ router.put("/:id", upload.single('update_file'), async (req, res) => {
     const fileName = req.file != null ? req.file.filename : null;
     const edited_title = req.body.edited_title;
     const edited_content = req.body.edited_content;
+    const edited_youtube_video_url = req.body.edited_youtube_video_url;
+    console.log(edited_youtube_video_url);
+    
 
     try { 
 
@@ -57,6 +61,12 @@ router.put("/:id", upload.single('update_file'), async (req, res) => {
         }
         if (edited_content) {
             preUpdateNote.content = edited_content;
+        }
+
+        if (edited_youtube_video_url) {
+            preUpdateNote.youtube_video_url = edited_youtube_video_url;
+            preUpdateNote.youtube_video_title = await getYoutubeTitle(edited_youtube_video_url);
+            console.log(preUpdateNote.youtube_video_title);
         }
 
         if (fileName) {
@@ -73,16 +83,10 @@ router.put("/:id", upload.single('update_file'), async (req, res) => {
 
     } catch 
     {
-        console.error("Error");
+        console.error("Error updating database");
         res.redirect("/");
     }
 
 });
-
-function deleteImage(imageName) {
-    fs.unlink(path.join(uploadPath, imageName), err => {
-        if (err) console.error(err);
-    });
-}
 
 module.exports = router;

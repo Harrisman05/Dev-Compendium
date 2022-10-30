@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Note = require('../model/note');
-const fetch = require('node-fetch');
+const getYoutubeTitle = require('./reuse_functions/getYoutubeTitle');
+const deleteImage = require('./reuse_functions/deleteImage');
 
 // Imports for images
 
-const fs = require("fs");
 const imageMimeTypes = ['image/jpeg','image/png','image/gif']
 const path = require('path');
 const uploadPath = path.join('public', Note.imagesBasePath)
@@ -41,11 +41,10 @@ router.post('/', upload.single('input_file'), async (req, res) => {
 
     const fileName = req.file != null ? req.file.filename : null;
     
-    let youtube_title
+    let youtube_title;
     if (req.body.youtube_video_url) {
         youtube_title = await getYoutubeTitle(req.body.youtube_video_url); 
     }
-
 
     const created_note = new Note({
         title: req.body.title,
@@ -94,25 +93,5 @@ router.delete("/:id", async (req, res) => {
     }
 
 });
-
-function deleteImage(imageName) {
-    fs.unlink(path.join(uploadPath, imageName), err => {
-        if (err) console.error(err);
-    });
-}
-
-async function getYoutubeTitle(vidurl) {
-    
-    const fetch_url = await fetch(`https://noembed.com/embed?dataType=json&url=${vidurl}`);
-
-    const fetch_url_json = await fetch_url.json();
-
-    const fetch_url_title = fetch_url_json.title;
-
-    console.log(fetch_url_title);
-    
-    return fetch_url_title;
-
-}
 
 module.exports = router;
