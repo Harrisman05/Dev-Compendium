@@ -18,3 +18,4 @@ window.onload = () => {
     // console.log("window onload function executing"); 
     window.scroll(0, reloadScrollPosition);
 }
+

@@ -14,7 +14,8 @@ const noteSchema = new mongoose.Schema({
         type: String
     },
     youtube_video_title: {
-        type: String
+        type: String,
+        default: "No Youtube Video URL Provided"
     },
     date: {
         type: Date,
