@@ -1,6 +1,6 @@
 <div class="notebox">
     <div> <%= allNotes.title %></div>
-    <div> <%= allNotes.content %></div>
+    <div style="white-space: pre-line"> <%= allNotes.content %></div>
     <a href=" <%= allNotes.youtube_video_url %>" target="_blank"> <%= allNotes.youtube_video_title %> </a>
     <div> <%= allNotes.date.toUTCString() %></div>
     <img src=/assets/images/<%=allNotes.imageName%> height="auto" width="200px" alt="">

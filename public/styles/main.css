@@ -22,6 +22,8 @@ textarea {
     display: block;
     height: 21.6px;
     padding: 3px;
+    resize: vertical;
+    overflow: hidden;
 }
 
 .notes_section {
