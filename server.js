@@ -40,7 +40,7 @@ mongoose.connect("mongodb://localhost/dev_compendium_db", {
 
 const db_connection = mongoose.connection; // Accessing connection variable
 db_connection.on('error', error => console.error(error)); // If error 
-db_connection.once('open', () => console.log('Connected to Mongoose')); // Confirming connection
+db_connection.once('open', () => console.log('Connected to Mongoose')); // Confirming connection in server
 
 // ALlow server to listen to requests from client
 

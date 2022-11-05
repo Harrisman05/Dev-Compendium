@@ -6,13 +6,13 @@
     </div>
     <form method="POST" action="/edit/<%= allNotes.id %>?_method=PUT" enctype="multipart/form-data">
         <input name="edited_title" value="<%= allNotes.title %>">
-        <textarea name="edited_content"><%= allNotes.content %></textarea>
+        <textarea name="edited_content" autofocus><%= allNotes.content %></textarea>
         <input placeholder="<%= allNotes.youtube_video_url %>" name="edited_youtube_video_url" pattern="^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+" title='Only valid Youtube URLs are accepted'>
-        <div> <%= allNotes.date.toUTCString() %></div>
-        <img src=/assets/images/<%=allNotes.imageName%> height="auto" width="200px" alt="">
+        <img id="upload_image" src=/assets/images/<%=allNotes.imageName%> alt=''>
         <div class="file_input_container">
             <input type="file" name="update_file">
         </div>
+        <div> <%= allNotes.date.toUTCString() %></div>
         <div class="modifiers_container">
             <button type="submit" class="note_modifier" id="update_button">Update</button>
             <a href="/" class="note_modifier" id="cancel_button">Cancel</a>

@@ -6,16 +6,21 @@ const deleteImage = require('./reuse_functions/deleteImage');
 
 // Imports for images
 
-const imageMimeTypes = ['image/jpeg','image/png','image/gif']
+// const imageMimeTypes = ['image/jpeg','image/png','image/gif'];
+
+// const uploadPath = path.join('public', Note.imagesBasePath)
+
+// const upload = multer({
+//     dest: uploadPath,
+//     fileFilter: (req, file, callback) => {
+//         callback(null, imageMimeTypes.includes(file.mimetype));
+//     }
+// });
+const sharp = require('sharp');
 const path = require('path');
-const uploadPath = path.join('public', Note.imagesBasePath)
 const multer = require('multer');
-const upload = multer({
-    dest: uploadPath,
-    fileFilter: (req, file, callback) => {
-        callback(null, imageMimeTypes.includes(file.mimetype));
-    }
-});
+const storage = multer.memoryStorage();
+const uploads = multer({ storage });
 
 // Middleware - Ensure to reset layout
 
@@ -29,7 +34,7 @@ router.use((req, res, next) => {
 
 router.get('/', async (req, res) => {
     console.log("Get request sent from client to root directory");
-
+    
     const allNotes = await Note.find({});
     res.render('index', {
         text: "res.render sent back from server",
@@ -37,10 +42,19 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.post('/', upload.single('input_file'), async (req, res) => {
+router.post('/', uploads.single('input_file'), async (req, res) => {
 
-    const fileName = req.file != null ? req.file.filename : null;
+    console.log("POST request sent from client");
     
+    const fileName = req.file != null ? req.file.filename : null;
+    console.log(req.file);
+
+    const image_name = req.file.originalname.replace(/\s/g, "") + Date.now();
+
+    await sharp(req.file.buffer).resize({
+        width: 600
+    }).toFile('./public/assets/images/' + image_name);
+
     let youtube_title;
     if (req.body.youtube_video_url) {
         youtube_title = await getYoutubeTitle(req.body.youtube_video_url); 
@@ -49,13 +63,13 @@ router.post('/', upload.single('input_file'), async (req, res) => {
     const created_note = new Note({
         title: req.body.title,
         content: req.body.content,
-        imageName: fileName,
+        imageName: image_name,
         youtube_video_url: req.body.youtube_video_url,
         youtube_video_title: youtube_title,
         date: new Date(),
     });
 
-    console.log(created_note);
+    // console.log(created_note);
     
     try {
         const saveNote = await created_note.save();

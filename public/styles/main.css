@@ -35,6 +35,13 @@ textarea {
     padding: 50px;
     background-image: url('/assets/images/chalkboard.jpg');
     background-size: cover;
+    /* background-repeat: repeat; */
+}
+
+#strava_link {
+    background-color: #fc4c02;
+    color: white;
+    padding: 5px;
 }
 
 .create_note_container {
@@ -130,7 +137,6 @@ textarea {
 }
 
 .notebox #notebox_content {
-    border: solid black 2px;
     white-space: pre-line;
 }
 
@@ -158,7 +164,7 @@ textarea {
 } 
 
 .notebox #timestamp {
-    align-self: flex-end;
+    align-self: center;
     font-style: italic;
 }
 
@@ -186,7 +192,7 @@ textarea {
 }
 
 .note_modifier {
-    font-size: 12px;
+    font-size: 25px;
     font-weight: bold;
 }
 
@@ -198,12 +204,8 @@ textarea {
     background-color: inherit;
 }
 
-.file_input_container  {
-    background-color: inherit;
-}
-
 #edit_button {
-    padding: 4px;
+    padding: 12px;
     border: solid 1px rgb(37, 58, 247); 
     border-radius: 40px;
     background-color: rgb(124, 189, 255);
@@ -211,7 +213,7 @@ textarea {
 
 #delete_button {
     justify-self: end;
-    padding: 5px;
+    padding: 10px;
     border: solid 1px black; 
     border-radius: 20px;
     color: black;

@@ -1,19 +1,19 @@
-<form action="/" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data">
     <div class="entry_field">
         <label> Title<span> *</span> </label>
         <input type="text" name="title" value="Test Title" required>
     </div>
     <div class="entry_field">
         <label> Content<span> *</span> </label>
-        <textarea type="text" name="content" id="content_textarea" required></textarea>
+        <textarea type="text" name="content" id="content_textarea" required>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sapiente asperiores quibusdam veritatis, et maxime ullam nam molestias minima nisi eaque quae repellat, illum nulla nesciunt officia, autem quam amet porro. Natus quisquam itaque deserunt dicta atque dignissimos ullam praesentium alias quidem veniam iusto est, qui mollitia quis reprehenderit officiis dolorum.</textarea>
     </div>
     <div class="entry_field">
         <label> Link Youtube Video </label>
-        <input type="text" name="youtube_video_url" id="create_youtube_video_url" placeholder="" pattern="^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+" title='Only Youtube Video URLs are accepted'>
+        <input type="text" name="youtube_video_url" id="create_youtube_video_url" value="https://www.youtube.com/watch?v=SccSCuHhOw0&ab_channel=WebDevSimplified" pattern="^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+" title='Only Youtube Video URLs are accepted'>
     </div>
     <div class="entry_field">
         <label> File upload </label>
-        <input type="file" name="input_file">
+        <input id="input_file" type="file" name="input_file">
     </div>
     <div class="required_indicator">
         <div><span>*</span><sub> indicates required</sub> </div>
