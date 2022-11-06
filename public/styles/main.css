@@ -33,8 +33,9 @@ textarea {
     align-items: center;
     gap: 50px;
     padding: 50px;
-    background-image: url('/assets/static_images/chalkboard.jpg');
+    background-image: url('/assets/static_images/corkboard.jpg'); 
     background-repeat: cover;
+    /* https://res.cloudinary.com/cspaveljb/image/upload/v1499110969/cork_w2tt25.jpg */
 }
 
 #strava_link {
@@ -97,27 +98,19 @@ textarea {
     grid-template-columns: 1fr 1fr;
 }
 
+/* #ffcb88 */
+
 .notebox {
-    border: 1px black solid;
-    background-color: #ffcb88;
+    background: url(http://i.stack.imgur.com/ynxjD.png) repeat-y;
     display: flex;
     flex-direction: column;
-    padding:  100px 50px 50px;
+    padding: 100px 50px 50px;
     gap: 10px;
     word-wrap: break-word;
-    width: 1000px;
+    width: 900px;
     position: relative;
-}
-
-.notebox .note_top_strip {
-    position: absolute;
-    height: 75px;
-    width: 100%;
-    background-color: rgb(98, 98, 98);
-    border: black 1px solid;
-    left: 0;
-    top: 0;
-    z-index: 10;
+    line-height: 25px;
+    box-shadow: 30px 30px 20px rgba(0, 0, 0, 0.354);
 }
 
 .notebox #drawing_pin_image {
@@ -129,6 +122,23 @@ textarea {
 }
 
 /* https://pixabay.com/vectors/drawing-pin-tack-thumbtack-red-146214/ */
+
+
+.notebox #edited_title {
+    width: fit-content;
+    align-self: center;
+    font-size: 24px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.notebox #edited_content {
+    font: normal 14px verdana;
+    line-height: 25px;
+    padding: 2px 10px;
+    border: solid 1px #ddd;
+}
 
 .notebox h1 {
     text-align: center;
@@ -231,7 +241,7 @@ textarea {
     justify-self: end;
     background-color: rgb(163, 153, 153);
     text-align: center;
-    padding: 5px;
+    padding: 10px;
     border: solid 1px black; 
     border-radius: 20px;
     color: black;

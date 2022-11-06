@@ -17,5 +17,10 @@ window.onload = () => {
     const reloadScrollPosition = localStorage.getItem("currentScrollPosition");
     // console.log("window onload function executing"); 
     window.scroll(0, reloadScrollPosition);
-}
 
+    const edited_textarea = document.getElementById("edited_content");
+
+    edited_textarea.focus({
+        preventScroll: true
+    })
+}
