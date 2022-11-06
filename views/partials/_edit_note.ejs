@@ -2,7 +2,7 @@
 <% if(selected_note_id === allNotes.id) { %>
 <div class="notebox">
     <div class="note_top_strip">
-        <img id="drawing_pin_image" src="/assets/images/drawing_pin.png" alt="">
+        <img id="drawing_pin_image" src="/assets/static_images/drawing_pin.png" alt="">
     </div>
     <form method="POST" action="/edit/<%= allNotes.id %>?_method=PUT" enctype="multipart/form-data">
         <input name="edited_title" value="<%= allNotes.title %>">
@@ -10,7 +10,7 @@
         <input placeholder="<%= allNotes.youtube_video_url %>" name="edited_youtube_video_url" pattern="^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+" title='Only valid Youtube URLs are accepted'>
         <img id="upload_image" src=/assets/images/<%=allNotes.imageName%> alt=''>
         <div class="file_input_container">
-            <input type="file" name="update_file">
+            <input type="file" name="update_file" accept="image/gif, image/jpeg, image/png">
         </div>
         <div> <%= allNotes.date.toUTCString() %></div>
         <div class="modifiers_container">
