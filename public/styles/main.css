@@ -33,7 +33,7 @@ textarea {
     align-items: center;
     gap: 50px;
     padding: 50px;
-    background-image: url('/assets/images/chalkboard.jpg');
+    background-image: url('/assets/static_images/chalkboard.jpg');
     background-size: cover;
     /* background-repeat: repeat; */
 }

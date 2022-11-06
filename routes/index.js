@@ -6,21 +6,12 @@ const deleteImage = require('./reuse_functions/deleteImage');
 
 // Imports for images
 
-// const imageMimeTypes = ['image/jpeg','image/png','image/gif'];
-
-// const uploadPath = path.join('public', Note.imagesBasePath)
-
-// const upload = multer({
-//     dest: uploadPath,
-//     fileFilter: (req, file, callback) => {
-//         callback(null, imageMimeTypes.includes(file.mimetype));
-//     }
-// });
-const sharp = require('sharp');
-const path = require('path');
 const multer = require('multer');
+const processImage = require('./reuse_functions/processImage');
 const storage = multer.memoryStorage();
-const uploads = multer({ storage });
+const uploads = multer({
+    storage
+});
 
 // Middleware - Ensure to reset layout
 
@@ -34,7 +25,7 @@ router.use((req, res, next) => {
 
 router.get('/', async (req, res) => {
     console.log("Get request sent from client to root directory");
-    
+
     const allNotes = await Note.find({});
     res.render('index', {
         text: "res.render sent back from server",
@@ -45,19 +36,15 @@ router.get('/', async (req, res) => {
 router.post('/', uploads.single('input_file'), async (req, res) => {
 
     console.log("POST request sent from client");
-    
-    const fileName = req.file != null ? req.file.filename : null;
-    console.log(req.file);
 
-    const image_name = req.file.originalname.replace(/\s/g, "") + Date.now();
-
-    await sharp(req.file.buffer).resize({
-        width: 600
-    }).toFile('./public/assets/images/' + image_name);
+    let image_name;
+    if (req.file) {
+        image_name = await processImage(req.file);
+    }
 
     let youtube_title;
     if (req.body.youtube_video_url) {
-        youtube_title = await getYoutubeTitle(req.body.youtube_video_url); 
+        youtube_title = await getYoutubeTitle(req.body.youtube_video_url);
     }
 
     const created_note = new Note({
@@ -70,7 +57,7 @@ router.post('/', uploads.single('input_file'), async (req, res) => {
     });
 
     // console.log(created_note);
-    
+
     try {
         const saveNote = await created_note.save();
         res.redirect('/');
@@ -85,13 +72,13 @@ router.post('/', uploads.single('input_file'), async (req, res) => {
 
 // :id needed as a different note id is sent back to server each time, depending on which note the user wants to delete
 
-router.delete("/:id", async (req, res) => { 
+router.delete("/:id", async (req, res) => {
     console.log("Delete request sent from client");
     let deleted_note;
     try {
         const findNote = await Note.findById(req.params.id);
         console.log(findNote);
-        
+
         if (findNote.imageName != null) { // if note has image, delete image from assets folder
             deleteImage(findNote.imageName);
         }
