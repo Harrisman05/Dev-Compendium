@@ -9,8 +9,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
     <script defer src="/scripts/onload_scroll.js"></script>
     <script defer src="/scripts/auto_textarea_resize.js"></script>
+    <script defer src="/scripts/darkmode.js"></script>
     <title>The Dev Logs</title>
 </head>
 
@@ -20,6 +24,7 @@
         <!-- Create note section -->
         <%- include('../partials/_create_note.ejs') %>
         <a id="strava_link" href="/strava">Strava</a>
+        <button id="darkmode_button"> Dark Mode </button>
     </div>
     <section class="notes_section">
         <%- body %>

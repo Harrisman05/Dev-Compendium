@@ -2,11 +2,11 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: 'Nunito Sans', sans-serif;
 }
 
 body {
     background-color:rgb(219, 219, 219);
+    font-family: 'Nunito Sans', sans-serif;
 }
 
 a:link {
@@ -27,6 +27,7 @@ textarea {
 }
 
 .notes_section {
+    font-family: 'Indie Flower', cursive;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -101,16 +102,49 @@ textarea {
 /* #ffcb88 */
 
 .notebox {
-    background: url(http://i.stack.imgur.com/ynxjD.png) repeat-y;
+    background: url('/assets/static_images/white_notebook_snip_resize2.jpg') repeat-y;
+    /* background: url('/assets/static_images/white_notebook_snip_resize2_darkmode_lines2.png') repeat-y; */
     display: flex;
     flex-direction: column;
-    padding: 100px 50px 50px;
+    padding: 100px 20px 50px;
     gap: 10px;
     word-wrap: break-word;
     width: 900px;
     position: relative;
     line-height: 25px;
     box-shadow: 30px 30px 20px rgba(0, 0, 0, 0.354);
+}
+
+.notebox h1 {
+    text-align: center;
+    padding-bottom: 50px;
+    font-size: 40px;
+    line-height: 40px;
+}
+
+.notebox_content_container {
+    display: grid;
+    grid-template-columns: 0.165fr 0.825fr;
+}
+
+#notebox_content_title {
+    text-align: center;
+    font-size: 35px;
+    line-height: 40px;
+    text-decoration: underline;
+}
+
+#notebox_content {
+    font-size: 30px;
+    padding-left: 10px;
+    position: relative;
+}
+
+#notebox_content p {
+    position: relative;
+    top: 5px;
+    line-height: 33px;
+    white-space: pre-line;
 }
 
 .notebox #drawing_pin_image {
@@ -140,14 +174,7 @@ textarea {
     border: solid 1px #ddd;
 }
 
-.notebox h1 {
-    text-align: center;
-    padding-bottom: 20px;
-}
 
-.notebox #notebox_content {
-    white-space: pre-line;
-}
 
 .notebox #upload_image {
     align-self: center;
