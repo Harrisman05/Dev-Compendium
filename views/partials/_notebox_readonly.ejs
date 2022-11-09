@@ -1,10 +1,10 @@
 <div class="notebox">
     <img id="drawing_pin_image" src="/assets/static_images/drawing_pin.png" alt="">
-    <h1> <%= allNotes.title %></h1>
+    <h1 id="notebox_heading"> <%= allNotes.title %></h1>
     <div class="notebox_content_container">
         <h2 id="notebox_content_title">Content:</h2>
         <div id="notebox_content">
-            <p> <%= allNotes.content %> </p>
+            <%- allNotes.sanitised_content %>
         </div>
     </div>
     <div class="youtube_link_container">

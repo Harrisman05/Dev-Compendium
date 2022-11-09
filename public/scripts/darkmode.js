@@ -7,7 +7,7 @@ const enableDarkMode = () => {
 
     noteboxes.forEach((notebox) => {
         notebox.style.backgroundImage = "url('/assets/static_images/white_notebook_snip_resize2_darkmode_lines2.png')";
-    })
+    });
 
 
     localStorage.setItem('darkMode', 'enabled');
@@ -20,7 +20,7 @@ const disableDarkMode = () => {
 
     noteboxes.forEach((notebox) => {
         notebox.style.backgroundImage = "url('/assets/static_images/white_notebook_snip_resize2.jpg')";
-    })
+    });
 
     localStorage.setItem('darkMode', null);
     console.log('Darkmode disabled');
@@ -42,5 +42,6 @@ darkModeToggle.addEventListener('click', () => {
     }
 
 
-})
+});
 
+// https://www.youtube.com/watch?v=wodWDIdV9BY&ab_channel=KevinPowell

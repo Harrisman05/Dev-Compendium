@@ -115,11 +115,12 @@ textarea {
     box-shadow: 30px 30px 20px rgba(0, 0, 0, 0.354);
 }
 
-.notebox h1 {
+.notebox #notebox_heading {
     text-align: center;
     padding-bottom: 50px;
-    font-size: 40px;
+    font-size: 60px;
     line-height: 40px;
+    padding-left: 141.9px;
 }
 
 .notebox_content_container {
@@ -135,17 +136,26 @@ textarea {
 }
 
 #notebox_content {
+    position: relative;
     font-size: 30px;
     padding-left: 10px;
-    position: relative;
 }
 
-#notebox_content p {
+#notebox_content p, li {
     position: relative;
     top: 5px;
     line-height: 33px;
-    white-space: pre-line;
+    white-space: pre-wrap;
 }
+
+#notebox_content h1, h2, h3, h4, h5, h6 {
+    position: relative;
+    font-size: 35px;
+    line-height: 33px;
+    top: 4px; 
+    white-space: pre-wrap;
+}
+
 
 .notebox #drawing_pin_image {
     position: absolute;

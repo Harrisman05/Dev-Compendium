@@ -70,6 +70,9 @@ router.put("/:id", uploads.single('update_file'), async (req, res) => {
 
         preUpdateNote.date = new Date();
 
+        console.log(preUpdateNote);
+        
+
         await preUpdateNote.save();
         res.redirect("/");
 
