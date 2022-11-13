@@ -38,7 +38,10 @@ const noteSchema = new mongoose.Schema({
 
 noteSchema.pre('validate', function(next) {
     if (this.content) {
+
+        this.content = this.content.replace('_', '&nbsp;');
         this.sanitised_content = dompurify.sanitize(marked.parse(this.content));
+
     }
     next();
 });

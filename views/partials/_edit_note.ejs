@@ -3,8 +3,11 @@
 <div class="notebox">
     <img id="drawing_pin_image" src="/assets/static_images/drawing_pin.png" alt="">
     <form method="POST" action="/edit/<%= allNotes.id %>?_method=PUT" enctype="multipart/form-data">
-        <input name="edited_title" id="edited_title" value="<%= allNotes.title %>">
-        <textarea name="edited_content" id="edited_content"><%= allNotes.content %></textarea>
+        <input maxlength="23" name="edited_title" id="edited_title" value="<%= allNotes.title %>">
+        <div class="notebox_content_container">
+            <h2 id="notebox_content_title">Content:</h2>
+            <textarea name="edited_content" id="edited_content"><%= allNotes.content %></textarea>
+        </div>
         <input placeholder="<%= allNotes.youtube_video_url %>" name="edited_youtube_video_url"
             pattern="^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+"
             title='Only valid Youtube URLs are accepted'>
