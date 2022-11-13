@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Note = require('../model/note');
-const getYoutubeTitle = require('./reuse_functions/getYoutubeTitle');
 const deleteImage = require('./reuse_functions/deleteImage');
 
 // Imports for images
@@ -42,17 +41,10 @@ router.post('/', uploads.single('input_file'), async (req, res) => {
         image_name = await processImage(req.file);
     }
 
-    let youtube_title;
-    if (req.body.youtube_video_url) {
-        youtube_title = await getYoutubeTitle(req.body.youtube_video_url);
-    }
-
     const created_note = new Note({
         title: req.body.title,
         content: req.body.content,
         imageName: image_name,
-        youtube_video_url: req.body.youtube_video_url,
-        youtube_video_title: youtube_title,
         date: new Date(),
     });
 

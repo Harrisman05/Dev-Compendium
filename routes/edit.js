@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Note = require('../model/note');
-const getYoutubeTitle = require('./reuse_functions/getYoutubeTitle');
 const deleteImage = require('./reuse_functions/deleteImage');
 
 // delete image function + dependencies for uploading a file
@@ -38,7 +37,6 @@ router.put("/:id", uploads.single('update_file'), async (req, res) => {
     
     const edited_title = req.body.edited_title;
     const edited_content = req.body.edited_content;
-    const edited_youtube_video_url = req.body.edited_youtube_video_url;
     
     try { 
 
@@ -52,11 +50,6 @@ router.put("/:id", uploads.single('update_file'), async (req, res) => {
         }
         if (edited_content) {
             preUpdateNote.content = edited_content;
-        }
-
-        if (edited_youtube_video_url) {
-            preUpdateNote.youtube_video_url = edited_youtube_video_url;
-            preUpdateNote.youtube_video_title = await getYoutubeTitle(edited_youtube_video_url);
         }
         
         let image_name;

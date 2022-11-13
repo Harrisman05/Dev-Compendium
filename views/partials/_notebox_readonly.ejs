@@ -7,12 +7,8 @@
             <%- allNotes.sanitised_content %>
         </div>
     </div>
-    <div class="youtube_link_container">
-        <div><span>Youtube Link: </span><a href=" <%= allNotes.youtube_video_url %>" target="_blank">
-                <%= allNotes.youtube_video_title %> </a></div>
-    </div>
     <img id="upload_image" src=/assets/images/<%=allNotes.imageName%> alt="">
-    <div id="timestamp"> <%= allNotes.date.toUTCString() %></div>
+    <div id="timestamp"> <span>Date Updated :</span> <%= allNotes.date.toUTCString() %></div>
     <div class="modifiers_container">
         <a href="/edit/<%= allNotes.id %>" class="note_modifier" id="edit_button">Edit</a>
         <form method="POST" action="/<%= allNotes.id %>?_method=DELETE" id="delete_form">

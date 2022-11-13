@@ -18,13 +18,6 @@ const noteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    youtube_video_url: {
-        type: String
-    },
-    youtube_video_title: {
-        type: String,
-        default: "No Youtube Video URL Provided"
-    },
     date: {
         type: Date,
         required: true
@@ -38,10 +31,8 @@ const noteSchema = new mongoose.Schema({
 
 noteSchema.pre('validate', function(next) {
     if (this.content) {
-
-        this.content = this.content.replace('_', '&nbsp;');
+        this.content = this.content.replaceAll('_', '&nbsp;');
         this.sanitised_content = dompurify.sanitize(marked.parse(this.content));
-
     }
     next();
 });
