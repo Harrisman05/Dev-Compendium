@@ -167,11 +167,6 @@ textarea {
     text-decoration: underline;
 }
 
-#notebox_content a:visited {
-    color: #551A8B;
-}
-
-
 .notebox #drawing_pin_image {
     position: absolute;
     left: 37%;

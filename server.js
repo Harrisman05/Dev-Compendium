@@ -4,7 +4,6 @@ const express = require('express');
 app = express();
 const expressLayouts = require('express-ejs-layouts');
 const methodOverride = require('method-override');
-const path = require('path');
 
 // allow express to accept form data, and put/delete request from client
 
@@ -34,13 +33,20 @@ app.use("/strava", stravaRouter);
 // Connectiing to Mongoose Database
 
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://localhost/dev_compendium_db", {
-    useNewUrlParser: true
-});
+const dotenv = require('dotenv').config();
 
-const db_connection = mongoose.connection; // Accessing connection variable
-db_connection.on('error', error => console.error(error)); // If error 
-db_connection.once('open', () => console.log('Connected to Mongoose')); // Confirming connection in server
+const uri = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@digitalnotebookcluster.shhmcpj.mongodb.net/?retryWrites=true&w=majority`
+
+async function connect() {
+    try {
+        await mongoose.connect(uri);
+        console.log('Connected to MongoDB Cluster');
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+connect();
 
 // ALlow server to listen to requests from client
 

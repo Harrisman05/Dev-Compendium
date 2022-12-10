@@ -1,13 +1,17 @@
-Digital Noteboard of Progress
-Content to include (TBC by format of FutureLearn/Skillsoft):
+Digital Progress Note
 
+# Content to include (TBC by format of FutureLearn/Skillsoft):
+&nbsp;
 Learnings from Curriculum
 Links to activities completed
-
 Non-technicals / extras
-
+&nbsp;
 - Health (see Strava page)
 - Coaching / Mentoring
 - Soft Skills
 - Mindfulness
 - Reflection on Scheme/Job
+&nbsp;
+[Anchor Tag](https://www.google.co.uk/)
+[Anchor Tag](https://www.google.co.uk/)
+[Anchor Tag](https://www.google.co.uk/)
