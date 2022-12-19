@@ -50,7 +50,7 @@ connect();
 
 // ALlow server to listen to requests from client
 
-app.listen((3500), () => {
-    console.log("Listening on PORT 3500...");
+app.listen(process.env.PORT || 3500, () => {
+    console.log(`Listening on PORT 3500 or ${process.env.PORT}...`);
 });
 
